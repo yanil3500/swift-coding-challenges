@@ -1,0 +1,156 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fnil\fcharset0 Menlo-Bold;\f5\fnil\fcharset0 Menlo-Regular;
+\f6\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red32\green60\blue63;
+\red0\green0\blue0;\red186\green0\blue17;\red29\green133\blue25;\red163\green0\blue79;\red255\green255\blue255;
+\red107\green0\blue109;\red135\green135\blue135;\red73\green17\blue135;\red148\green108\blue71;\red0\green0\blue255;
+}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\csgenericrgb\c12359\c23384\c24757;
+\csgenericrgb\c0\c0\c0;\csgenericrgb\c72768\c0\c6662;\csgenericrgb\c11489\c52197\c9852;\cssrgb\c70588\c0\c38431;\cssrgb\c100000\c100000\c100000;
+\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;\cssrgb\c65098\c49804\c34902;\cssrgb\c0\c0\c100000;
+}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww22160\viewh16020\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 1: Are the letters unique? 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Easy\uc0\u8232 Write a function that accepts a 
+\f3\b \cf3 String 
+\f2\b0 \cf2 as its only parameter, and returns true if the string has only unique letters, taking letter case into account. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93No duplicates\'94 should return true. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93abcdefghijklmnopqrstuvwxyz\'94 should return true. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93AaBbCc\'94 should return true because the challenge is case-sensitive. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93Hello, world\'94 should return false because of the double Ls and double Os. \uc0\u8232 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf2 For this initial challenge I\'92ll write some test cases for you, so that you have something to use \
+\pard\tx890\pardeftab890\pardirnatural\partightenfactor0
+
+\f4\b\fs36 \cf4 \kerning1\expnd0\expndtw0 \CocoaLigature0 challenge1
+\f5\b0 \cf5 (input: 
+\f4\b \cf6 "No duplicates"
+\f5\b0 \cf5 ) \cf7 //should return true\
+
+\f4\b \cf4 challenge1
+\f5\b0 \cf5 (input: 
+\f4\b \cf6 "abcdefghijklmnopqrstuvwkyz"
+\f5\b0 \cf5 ) \cf7 //should return true\
+
+\f4\b \cf4 challenge1
+\f5\b0 \cf5 (input: 
+\f4\b \cf6 "AaBbCc"
+\f5\b0 \cf5 ) \cf7 // should return true\
+
+\f4\b \cf4 challenge1
+\f5\b0 \cf5 (input: 
+\f4\b \cf6 "Hello, world"
+\f5\b0 \cf5 ) \cf7 //should return false\
+
+\f2\fs32 \cf2 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Hints 
+\f1\b0\fs24 \
+
+\f2\fs32 Remember, read as few hints as you can to help you solve the challenge, and only read them if you\'92ve tried and failed. (This reminder won\'92t be repeated again.) 
+\f1\fs24 \
+
+\b\fs32 Hint #1: 
+\f2\b0 You should work with the 
+\f3\b \cf3 characters 
+\f2\b0 \cf2 property of the input string. This is an array-like object that contains 
+\f3\b \cf3 Character 
+\f2\b0 \cf2 elements. 
+\f1\fs24 \
+
+\b\fs32 Hint #2: 
+\f2\b0 You could use a temporary array to store characters that have been checked, but it\'92s not necessary. 
+\f1\fs24 \
+
+\b\fs32 Hint #3: 
+\f2\b0 Sets are like arrays, except they can\'92t contain duplicate elements.\uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 You can create sets from arrays and arrays from sets. Both have a 
+\f3\b \cf3 count 
+\f2\b0 \cf2 property. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Solution 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 There are two ways to solve this, both of which are perfectly fine given our test cases. First, the brute force approach: create an array of checked characters, then loop through every letter in the input string and append the latter to the list of checked characters, returning false as soon as a call to 
+\f3\b \cf3 contains() 
+\f2\b0 \cf2 fails. 
+\f1\fs24 \
+
+\f2\fs32 Here\'92s how that code would look: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f6\fs32 \cf8 \cb9 func \cf10 challenge1a\cf11 (\cf2 input\cf11 : \cf12 String\cf11 ) \cf13 -> \cf12 Bool \cf11 \{\
+\cf8    var \cf2 usedLetters \cf13 = \cf11 [\cf12 Character\cf11 ]()\
+\cf8    for \cf2 letter \cf8 in \cf2 input\cf11 .\cf2 characters \cf11 \{\
+\cf8       if \cf2 usedLetters\cf11 .\cf10 contains\cf11 (\cf2 letter\cf11 ) \{\
+\cf8          return \cf14 false\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11       \}\
+\cf2       usedLetters\cf11 .\cf10 append\cf11 (\cf2 letter\cf11 )\
+   \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf8 return \cf14 true \cf11 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 That solution is correct with the example input and output I provided, but you should be prepared to discuss that it doesn\'92t scale well: calling 
+\f3\b \cf3 contains() 
+\f2\b0 \cf2 on an array is an O(n) operation, which means it gets slower as more items are added to the array. If our text were in a language with very few duplicate characters, such as Chinese, this might cause performance 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f0\fs32 \cf2 www.hackingwithswift.com 13 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 issues. 
+\f1\fs24 \
+
+\f2\fs32 The smart solution is to use 
+\f3\b \cf3 Set
+\f2\b0 \cf2 , which can be created directly from the 
+\f3\b \cf3 characters 
+\f2\b0 \cf2 property of the input string. Sets cannot contain duplicate items, so if we create a set from the input string then the count of the set will equal the count of the input\'92s 
+\f3\b \cf3 characters 
+\f2\b0 \cf2 property if there are no duplicates. 
+\f1\fs24 \
+
+\f2\fs32 In code you would write this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f6\fs32 \cf8 \cb9 func \cf10 challenge1b\cf11 (\cf2 input\cf11 : \cf12 String\cf11 ) \cf13 -> \cf12 Bool \cf11 \{\
+\cf8    return \cf10 Set\cf11 (\cf2 input\cf11 .\cf2 characters\cf11 ).\cf12 count \cf13 == \cf2 input\cf11 .\cf2 characters\cf11 .\cf12 count\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf11 \} 
+\f1\fs24 \cf2 \cb1 \
+}

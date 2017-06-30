@@ -1,0 +1,114 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red107\green0\blue109;\red135\green135\blue135;\red73\green17\blue135;\red148\green108\blue71;
+\red0\green0\blue255;\red169\green0\blue15;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;\cssrgb\c65098\c49804\c34902;
+\cssrgb\c0\c0\c100000;\cssrgb\c72941\c0\c6667;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 7: Condense whitespace 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Easy\uc0\u8232 Write a function that returns a string with any consecutive spaces replaced with a single space. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 I\'92ve marked spaces using \'93[space]\'94 below for visual purposes: 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93a[space][space][space]b[space][space][space]c\'94 should return \'93a[space]b[space]c\'94. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93[space][space][space][space]a\'94 should return \'93[space]a\'94. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93abc\'94 should return \'93abc\'94. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 You might think it a good idea to use 
+\f3\b \cf3 components(separatedBy:) 
+\f2\b0 \cf2 then 
+\f3\b \cf3 joined()
+\f2\b0 \cf2 , but that will struggle with leading and trailing spaces. \uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 You could loop over each character, keeping track of a 
+\f3\b \cf3 seenSpace 
+\f2\b0 \cf2 boolean that gets set to true when the previous character was a space. \uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 You could use regular expressions.\uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 Try using 
+\f3\b \cf3 replacingOccurrences(of:) 
+\f2\b0 \cf2 \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Solution 
+\f2\b0\fs32 \uc0\u8232 As is the case for many other string challenges, we can write a na\'efve solution or a clever one, but here the clever one is dramatically simpler \'96 and it uses regular expressions. (Yes, you 
+\f1\i did 
+\f2\i0 just read \'93simpler\'94 and \'93regular expressions\'94 in the same sentence.) \uc0\u8232 But first, let\'92s look at something you might have tried: \u8232 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4 \cf4 \cb5 func \cf6 challenge7\cf7 (\cf2 input\cf7 : \cf8 String\cf7 ) \cf9 -> \cf8 String \cf7 \{\
+\cf4    let \cf2 components \cf9 =\
+\cf2 input\cf7 .\cf6 components\cf7 (\cf2 separatedBy\cf7 : .\cf2 whitespacesAndNewlines\cf7 )\
+\cf4    return \cf2 components\cf7 .\cf8 filter \cf7 \{ \cf9 !\cf2 $\cf10 0\cf7 .\cf8 isEmpty \cf7 \}.\cf6 joined\cf7 (\cf2 separator\cf7 : \cf11 "\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf11 "\cf7 ) \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 That splits a string up by its spaces, then removes any empty items, and joins the remainder using a space, and is the ideal solution \'96 if your goal is to remove any duplicate whitespace while 
+\f1\i also 
+\f2\i0 removing leading and trailing whitespace. However, it fails the requirement that \'93[space][space][space][space]a\'94 should return \'93[space]a\'93, so you should have rejected it. 
+\f1\fs24 \
+
+\f2\fs32 Instead, you might have written a loop over the characters in the input string. If the current letter was a space and you had already seen one in this run, continue to the next letter. Otherwise, mark that you\'92ve seen a space. If it wasn\'92t a space, clear the space flag. Regardless of whether it was the first space or a letter, append it to an output string. 
+\f1\fs24 \
+
+\f2\fs32 Transform that into Swift and you get this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge7a\cf7 (\cf2 input\cf7 : \cf8 String\cf7 ) \cf9 -> \cf8 String \cf7 \{\
+\cf4    var \cf2 seenSpace \cf9 = \cf10 false\
+\cf4    var \cf2 returnValue \cf9 = \cf11 ""\
+\cf4    for \cf2 letter \cf4 in \cf2 input\cf7 .\cf2 characters \cf7 \{\
+\cf4       if \cf2 letter \cf9 == \cf11 " " \cf7 \{\
+\cf4          if \cf2 seenSpace \cf7 \{ \cf4 continue \cf7 \}\
+\cf2          seenSpace \cf9 = \cf10 true\
+\cf7       \} \cf4 else \cf7 \{\
+\cf2          seenSpace \cf9 = \cf10 false\
+\cf7       \}\
+\cf2       returnValue\cf7 .\cf6 append\cf7 (\cf2 letter\cf7 )\
+   \}\
+\cf4    return \cf2 returnValue\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 This is a clear solution, and it works great. However, for once, this is a place where regular expressions can help: they turn all that into a single line of code: 
+\f1\fs24 \
+
+\f2\fs32 If you\'92re not familiar with regular expressions, \'93[space]+\'94 means \'93match one or more spaces\'94, so that will cause all multiple spaces to be replaced with a single space. Running regular expressions isn\'92t cheap, so that code runs about 50% the speed of the manual solution, but you would have to be doing a heck of a lot of work in order for it to be noticeable. 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge7b\cf7 (\cf2 input\cf7 : \cf8 String\cf7 ) \cf9 -> \cf8 String \cf7 \{\
+\cf4    return \cf2 input\cf7 .\cf6 replacingOccurrences\cf7 (\cf2 of\cf7 : \cf11 " +"\cf7 , \cf2 with\cf7 : \cf11 " "\cf7 ,\
+\cf2 options\cf7 : .\cf2 regularExpression\cf7 , \cf2 range\cf7 : \cf10 nil\cf7 )\
+\}\
+}

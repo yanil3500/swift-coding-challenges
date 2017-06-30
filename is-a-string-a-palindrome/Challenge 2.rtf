@@ -1,0 +1,106 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red148\green108\blue71;\red107\green0\blue109;\red135\green135\blue135;\red73\green17\blue135;
+}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c65098\c49804\c34902;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;
+}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 2: Is a string a palindrome? 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Easy\uc0\u8232 Write a function that accepts a 
+\f3\b \cf3 String 
+\f2\b0 \cf2 as its only parameter, and returns true if the string 
+\f1\fs24 \
+
+\f2\fs32 reads the same when reversed, ignoring case. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93rotator\'94 should return true. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93Rats live on no evil star\'94 should return true. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93Never odd or even\'94 should return false; even though the letters are the \uc0\u8232 same in reverse the spaces are in different places. \u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93Hello, world\'94 should return false because it reads \'93dlrow ,olleH\'94 \uc0\u8232 backwards. \u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 You can reverse arrays using their 
+\f3\b \cf3 reversed() 
+\f2\b0 \cf2 method. \uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 Two arrays compare as equal if they contain the same items in the same order. They are value types in Swift, so it doesn\'92t matter how they were created, as long as their values are the same. \uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 The 
+\f3\b \cf3 characters 
+\f2\b0 \cf2 property of a string isn\'92t really an array, but you can make it one using 
+\f3\b \cf3 Array()
+\f2\b0 \cf2 . \uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 You need to ignore case, so consider forcing the string to either lowercase or uppercase before comparing. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Solution 
+\f2\b0\fs32 \uc0\u8232 This is one of the most common interview questions you\'92ll come across, and it has a particular quirk in Swift that might have caught you out: the 
+\f3\b \cf3 characters 
+\f2\b0 \cf2 property of a String might \uc0\u8232 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 look a bit like an array, but it\'92s actually a 
+\f3\b \cf3 String.CharacterView
+\f2\b0 \cf2 . Fortunately, you can create an array from it like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 let \cf2 characterArray \cf6 = \cf7 Array\cf8 (\cf2 input\cf8 .\cf2 characters\cf8 )\cb1 \uc0\u8232 
+\f2 \cf2 Once you figure that out, you\'92ll just need to use 
+\f3\b \cf3 reversed() 
+\f2\b0 \cf2 to reverse the string\'92s 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 characters, then compare the reversed array with the character view-as-array, like this: 
+\f1\fs24 \
+
+\f2\fs32 Remember, strings are value types in Swift, which means they compare as equal as long as their contents are identical - it doesn\'92t matter how they are created. As an analogy, we all know that 2 times 2 is equal to 2 + 2, even though the number 4 was created using different methods. The same is true of Swift\'92s string: even though one is reversed, the 
+\f3\b \cf3 == 
+\f2\b0 \cf2 operator just compares the current value. 
+\f1\fs24 \
+
+\f2\fs32 Finally, make sure you remember that your comparison should ignore string case. This can be done with the 
+\f3\b \cf3 lowercased() 
+\f2\b0 \cf2 method on the input string, like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf7 challenge2\cf8 (\cf2 input\cf8 : \cf9 String\cf8 ) \cf6 -> \cf9 Bool \cf8 \{\
+\cf4    return \cf2 input\cf8 .\cf2 characters\cf8 .\cf7 reversed\cf8 () \cf6 ==\
+\cf7 Array\cf8 (\cf2 input\cf8 .\cf2 characters\cf8 )\
+\}\
+\cf4 func \cf7 challenge2\cf8 (\cf2 input\cf8 : \cf9 String\cf8 ) \cf6 -> \cf9 Bool \cf8 \{\
+\cf4    let \cf2 lowercase \cf6 = \cf2 input\cf8 .\cf7 lowercased\cf8 ()\
+\cf4    return \cf2 lowercase\cf8 .\cf2 characters\cf8 .\cf7 reversed\cf8 () \cf6 ==\
+\cf7 Array\cf8 (\cf2 lowercase\cf8 .\cf2 characters\cf8 )\
+\}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 Done! 
+\f1\fs24 \
+}

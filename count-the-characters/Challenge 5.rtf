@@ -1,0 +1,149 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red107\green0\blue109;\red135\green135\blue135;\red73\green17\blue135;\red148\green108\blue71;
+\red0\green0\blue255;\red169\green0\blue15;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;\cssrgb\c65098\c49804\c34902;
+\cssrgb\c0\c0\c100000;\cssrgb\c72941\c0\c6667;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 5: Count the characters 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Easy\uc0\u8232 Write a function that accepts a string, and returns how many times a specific character appears, 
+\f1\fs24 \
+
+\f2\fs32 taking case into account. 
+\f1\fs24 \
+
+\b\fs32 Tip: 
+\f2\b0 If you can solve this without using a 
+\f3\b \cf3 for-in 
+\f2\b0 \cf2 loop, you can consider it a Tricky challenge. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The letter \'93a\'94 appears twice in \'93The rain in Spain\'94. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The letter \'93i\'94 appears four times in \'93Mississippi\'94. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The letter \'93i\'94 appears three times in \'93Hacking with Swift\'94. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 Remember that 
+\f3\b \cf3 String 
+\f2\b0 \cf2 and 
+\f3\b \cf3 Character 
+\f2\b0 \cf2 are different data types.\uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 Don\'92t be afraid to go down the brute force route: looping over characters using a \uc0\u8232 
+\f3\b \cf3 for-in 
+\f2\b0 \cf2 loop.\uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 You could solve this functionally using 
+\f3\b \cf3 reduce()
+\f2\b0 \cf2 , but tread carefully. \uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 You could solve this using 
+\f3\b \cf3 NSCountedSet
+\f2\b0 \cf2 , but I\'92d be suspicious unless you could justify the extra overhead. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Solution 
+\f2\b0\fs32 \uc0\u8232 You might be surprised to hear me saying this, but: this is a great interview question. It\'92s simple to explain, it\'92s simple to code, and it has enough possible solutions that it\'92s likely to generate some interesting discussion \'96 which is gold dust in interviews. \u8232 This question is also interesting, because it\'92s another good example where the simple brute \u8232 force approach is both among the most readable and most efficient. I suggested two alternatives in the hints, and I think it\'92s an interesting code challenge for you to try all three. 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 First, the easy solution: loop over the characters by hand, comparing against the check character. In code, it would be this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge5a\cf7 (\cf2 input\cf7 : \cf8 String\cf7 , \cf8 count\cf7 : \cf8 Character\cf7 ) \cf9 -> \cf8 Int \cf7 \{\
+\cf4    var \cf2 letterCount \cf9 = \cf10 0\
+\cf4    for \cf2 letter \cf4 in \cf2 input\cf7 .\cf2 characters \cf7 \{\
+\cf4       if \cf2 letter \cf9 == \cf8 count \cf7 \{\
+\cf2          letterCount \cf9 += \cf10 1\
+\cf7       \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    return \cf2 letterCount\
+\cf7 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 There\'92s nothing complicated there, but do make sure you accept the check character as a 
+\f3\b \cf3 Character 
+\f2\b0 \cf2 to make the equality operation smooth. 
+\f1\fs24 \
+
+\f2\fs32 The second option is to solve this problem functionally using 
+\f3\b \cf3 reduce()
+\f2\b0 \cf2 . This has the advantage of making for very clear, expressive, and concise code, particularly when combined with the ternary operator: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge5b\cf7 (\cf2 input\cf7 : \cf8 String\cf7 , \cf8 count\cf7 : \cf8 Character\cf7 ) \cf9 -> \cf8 Int \cf7 \{\
+\cf4    return \cf2 input\cf7 .\cf2 characters\cf7 .\cf6 reduce\cf7 (\cf10 0\cf7 ) \{\
+\cf2       $\cf10 1 \cf9 == \cf8 count \cf9 ? \cf2 $\cf10 0 \cf9 + \cf10 1 \cf7 : \cf2 $\cf10 0\
+\cf7    \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 So, that will start with 0, then go over every character in the string. If a given letter matches the input character, then it will add 1 to the reduce counter, otherwise it will return the current reduce counter. Functional programming does make for shorter code, and the intent here is nice and clear, however this is not quite as performant \'96 it runs about 10% slower than the first solution. 
+\f1\fs24 \
+
+\f2\fs32 A third solution is to use 
+\f3\b \cf3 NSCountedSet
+\f2\b0 \cf2 , but that\'92s wasteful unless you intend to count several characters. It\'92s also complicated because Swift bridges 
+\f3\b \cf3 String 
+\f2\b0 \cf2 to 
+\f3\b \cf3 NSObject 
+\f2\b0 \cf2 well, but doesn\'92t bring 
+\f3\b \cf3 Character
+\f2\b0 \cf2 , so 
+\f3\b \cf3 NSCountedSet 
+\f2\b0 \cf2 won\'92t play nicely unless you convert the characters yourself. So, your code would end up being something like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge5c\cf7 (\cf2 input\cf7 : \cf8 String\cf7 , \cf8 count\cf7 : \cf8 String\cf7 ) \cf9 -> \cf8 Int \cf7 \{\
+\cf4    let \cf2 array \cf9 = \cf2 input\cf7 .\cf2 characters\cf7 .\cf8 map \cf7 \{ \cf6 String\cf7 (\cf2 $\cf10 0\cf7 ) \}\
+\cf4    let \cf2 counted \cf9 = \cf6 NSCountedSet\cf7 (\cf2 array\cf7 : \cf2 array\cf7 )\
+\cf4    return \cf2 counted\cf7 .\cf6 count\cf7 (\cf4 for\cf7 : \cf8 count\cf7 )\
+\}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 That creates an array of strings by converting each character in the input string, then creates a counted set from the string array, and finally returns the count \'96 for a single letter. Wasteful, for sure, and inefficient too \'96 a massive ten times slower than the original. 
+\f1\fs24 \
+
+\f2\fs32 There\'92s actually a fourth option you might have chosen. It\'92s the shortest option, however it requires a little lateral thinking: you can calculate how many times a letter appears in a string by removing it, then comparing the lengths of the original and modified strings. Here it is in Swift: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge5d\cf7 (\cf2 input\cf7 : \cf8 String\cf7 , \cf8 count\cf7 : \cf8 String\cf7 ) \cf9 -> \cf8 Int \cf7 \{\
+\cf4    let \cf2 modified \cf9 = \cf2 input\cf7 .\cf6 replacingOccurrences\cf7 (\cf2 of\cf7 : \cf8 count\cf7 , \cf2 with\cf7 :\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 ""\cf7 )\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4    return \cf2 input\cf7 .\cf2 characters\cf7 .\cf8 count \cf9 - \cf2 modified\cf7 .\cf2 characters\cf7 .\cf8 count\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+}

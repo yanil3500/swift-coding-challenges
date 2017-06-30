@@ -1,0 +1,88 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red163\green0\blue79;\red255\green255\blue255;
+\red107\green0\blue109;\red135\green135\blue135;\red73\green17\blue135;\red148\green108\blue71;\red0\green0\blue255;
+}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c70588\c0\c38431;\cssrgb\c100000\c100000\c100000;
+\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;\cssrgb\c65098\c49804\c34902;\cssrgb\c0\c0\c100000;
+}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 8: String is rotated 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Tricky\uc0\u8232 Write a function that accepts two strings, and returns true if one string is rotation of the other, 
+\f1\fs24 \
+
+\f2\fs32 taking letter case into account. 
+\f1\fs24 \
+
+\b\fs32 Tip: 
+\f2\b0 A string rotation is when you take a string, remove some letters from its end, then append them to the front. For example, \'93swift\'94 rotated by two characters would be \'93ftswi\'94. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93abcde\'94 and \'93eabcd\'94 should return true. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93abcde\'94 and \'93cdeab\'94 should return true. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93abcde\'94 and \'93abced\'94 should return false; this is not a string rotation. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93abc\'94 and \'93a\'94 should return false; this is not a string rotation. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 This is easier than you think.\uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 A string is only considered a rotation if is identical to the original once you factor in \uc0\u8232 the letter movement. That is, \'93tswi\'94 is not a rotation of \'93swift\'94 because it is missing the F. \u8232 
+\f1\b Hint #3: 
+\f2\b0 If you write a string twice, it must encapsulate all possible rotations, e.g. \'93catcat\'94 contains \'93cat\'94, \'93tca\'94, and \'93atc\'94. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Solution 
+\f2\b0\fs32 \uc0\u8232 This question appears in coding interviews far more than it deserves, because it\'92s a problem that seems tricky the first time you face it but is staring-you-in-the-face obvious once someone has told you the solution. I wonder how many times this question appears on interviews just so the interviewer can feel smug about knowing the answer! \u8232 Anyway, let\'92s talk about the solution. As I said in hint #3, if you write a string twice it must always encapsulate all possible rotations. So if your string was \'93abc\'94 then you would double it to \'93abcabc\'94, which contains all possible rotations: \'93abc\'94, \'93cab\'94, and \'93bca\'94. 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 So, an initial solution might look like this: 
+\f1\fs24 \
+
+\f2\fs32 However, that\'92s imperfect \'96 the final example input and output was that \'93abc\'94 should return false when given the test string \'93a\'94. Using the code above, the input string would be double to \'93abcabc\'94, which clearly contains the test string \'93a\'94. To fix this, we need to check not only that the test string exists in the doubled input, but also that both strings are the same size. 
+\f1\fs24 \
+
+\f2\fs32 So, the correct solution is this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 func \cf5 challenge8\cf6 (\cf2 input\cf6 : \cf7 String\cf6 , \cf2 rotated\cf6 : \cf7 String\cf6 ) \cf8 -> \cf7 Bool \cf6 \{\
+\cf3    let \cf2 combined \cf8 = \cf2 input \cf8 + \cf2 input\
+\cf3    return \cf2 combined\cf6 .\cf5 contains\cf6 (\cf2 rotated\cf6 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf6 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 func \cf5 challenge8\cf6 (\cf2 input\cf6 : \cf7 String\cf6 , \cf2 rotated\cf6 : \cf7 String\cf6 ) \cf8 -> \cf7 Bool \cf6 \{\
+\cf3    guard \cf2 input\cf6 .\cf2 characters\cf6 .\cf7 count \cf8 == \cf2 rotated\cf6 .\cf2 characters\cf6 .\cf7 count\
+\cf3 else \cf6 \{ \cf3 return \cf9 false \cf6 \}\
+\cf3    let \cf2 combined \cf8 = \cf2 input \cf8 + \cf2 input\
+\cf3    return \cf2 combined\cf6 .\cf5 contains\cf6 (\cf2 rotated\cf6 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf6 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 Like I said, it\'92s easier than you think, but is it a test of coding knowledge? Not really. If anything, you get a brief \'93aha!\'94 flash when someone explains the solution to you, but apart from scoring you some interview brownie points I doubt this would be useful in real life. 
+\f1\fs24 \
+}

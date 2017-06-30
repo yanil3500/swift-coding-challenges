@@ -1,0 +1,182 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red148\green108\blue71;\red169\green0\blue15;\red107\green0\blue109;\red135\green135\blue135;
+\red73\green17\blue135;\red0\green0\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c65098\c49804\c34902;\cssrgb\c72941\c0\c6667;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;
+\cssrgb\c36078\c14902\c60000;\cssrgb\c0\c0\c100000;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 6: Remove duplicate letters from a string 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Easy\uc0\u8232 Write a function that accepts a string as its input, and returns the same string just with 
+\f1\fs24 \
+
+\f2\fs32 duplicate letters removed. 
+\f1\fs24 \
+
+\b\fs32 Tip: 
+\f2\b0 If you can solve this challenge without a 
+\f3\b \cf3 for-in 
+\f2\b0 \cf2 loop, you can consider it \'93tricky\'94 rather than \'93easy\'94. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93wombat\'94 should print \'93wombat\'94. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93hello\'94 should print \'93helo\'94. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93Mississippi\'94 should print \'93Misp\'94. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 Sets are great at removing duplicates, but bad at retaining order.\uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 Foundation does have a way of forcing sets to retain their order, but you need to \uc0\u8232 handle the typecasting.\u8232 
+\f1\b Hint #3: 
+\f2\b0 You can create strings out of character arrays. 
+\f1\b Hint #4: 
+\f2\b0 You can solve this functionally using 
+\f3\b \cf3 filter()
+\f2\b0 \cf2 . \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Solution 
+\f2\b0\fs32 \uc0\u8232 There are three interesting ways this can be solved, and I\'92m going to present you with all three so you can see which suits you best. Remember: \'93fastest\'94 isn\'92t always \'93best\'94, not least because readability is important, but also particularly because \'93memorizability\'94 is important too \'96 the perfect solution is often easily forgotten when you\'92re being tested. \u8232 Let\'92s look at a slow but interesting solution first: using sets. Swift\'92s standard library has a \u8232 built-in 
+\f3\b \cf3 Set 
+\f2\b0 \cf2 type, but it does 
+\f1\i not 
+\f2\i0 preserve the order of its elements. This is a shame, because otherwise the solution would have been as simple as this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 However, Foundation has a specialized set type called 
+\f3\b \cf3 NSOrderedSet
+\f2\b0 \cf2 . This also removes duplicates, but now ensures items stay in the order they were added. Sadly, it\'92s not bridged to Swift in any pleasing way, which means to use it you must add typecasting: once from 
+\f3\b \cf3 Character 
+\f2\b0 \cf2 to 
+\f3\b \cf3 String 
+\f2\b0 \cf2 before creating the set, then once from 
+\f3\b \cf3 Array<Any> 
+\f2\b0 \cf2 to 
+\f3\b \cf3 Array<String>
+\f2\b0 \cf2 . 
+\f1\fs24 \
+
+\f2\fs32 This function does just that: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 let \cf2 string \cf6 = \cf7 "wombat"\
+\cf4 let set \cf6 = \cf8 Set\cf9 (\cf2 string\cf9 .\cf2 characters\cf9 )\
+\cf8 print\cf9 (\cf8 String\cf9 (\cf4 set\cf9 ))\
+\cf4 func \cf8 challenge6a\cf9 (\cf2 string\cf9 : \cf10 String\cf9 ) \cf6 -> \cf10 String \cf9 \{\
+\cf4    let \cf2 array \cf6 = \cf2 string\cf9 .\cf2 characters\cf9 .\cf10 map \cf9 \{ \cf8 String\cf9 (\cf2 $\cf11 0\cf9 ) \}\
+\cf4    let set \cf6 = \cf8 NSOrderedSet\cf9 (\cf2 array\cf9 : \cf2 array\cf9 )\
+\cf4    let \cf2 letters \cf6 = \cf8 Array\cf9 (\cf4 set\cf9 ) \cf4 as! \cf10 Array\cf6 <\cf10 String\cf6 >\
+\cf4    return \cf2 letters\cf9 .\cf8 joined\cf9 ()\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf9 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 That passes all tests, but I think you\'92ll agree it\'92s a bit ugly. I suspect Swift might see a native 
+\f3\b \cf3 OrderedSet 
+\f2\b0 \cf2 type in the future. 
+\f1\fs24 \
+
+\f2\fs32 A second solution is to take a brute-force approach: create an array of used characters, then loop through every letter in the string and check if it\'92s already in the used array. If it isn\'92t, add it, then finally return a stringified form of the used array. 
+\f1\fs24 \
+
+\f2\fs32 This is nice and easy to write, as long as you know that you can create a 
+\f3\b \cf3 String 
+\f2\b0 \cf2 directly from a 
+\f3\b \cf3 Character 
+\f2\b0 \cf2 array: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf8 challenge6b\cf9 (\cf2 string\cf9 : \cf10 String\cf9 ) \cf6 -> \cf10 String \cf9 \{\
+\cf4    var \cf2 used \cf6 = \cf9 [\cf10 Character\cf9 ]()\
+\cf4    for \cf2 letter \cf4 in \cf2 string\cf9 .\cf2 characters \cf9 \{\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f0 \cf2 \cb1 www.hackingwithswift.com 26 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5       if \cf6 !\cf2 used\cf9 .\cf8 contains\cf9 (\cf2 letter\cf9 ) \{\
+\cf2          used\cf9 .\cf8 append\cf9 (\cf2 letter\cf9 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf9 \} \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    return \cf8 String\cf9 (\cf2 used\cf9 )\
+\}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 There is a third solution, and I think it\'92s guaranteed to generate some interesting discussion in an interview or book group! 
+\f1\fs24 \
+
+\f2\fs32 As you know, dictionaries hold a value attached to a key, and only one value can be attached to a specific key at any time. You can change the value attached to a key just by assigning it again, but you can also call the 
+\f3\b \cf3 updateValue() 
+\f2\b0 \cf2 method \'96 it does the same thing, but also returns either the original value or nil if there wasn\'92t one. So, if you call 
+\f3\b \cf3 updateValue() 
+\f2\b0 \cf2 and get back nil it means \'93that wasn\'92t already in the dictionary, but it is now.\'94 
+\f1\fs24 \
+
+\f2\fs32 We can use this method in combination with the 
+\f3\b \cf3 filter() 
+\f2\b0 \cf2 method on our input string\'92s 
+\f3\b \cf3 character 
+\f2\b0 \cf2 property: filter the characters so that only those that return nil for 
+\f3\b \cf3 updateValue() 
+\f2\b0 \cf2 are used in the return array. 
+\f1\fs24 \
+
+\f2\fs32 So, the third solution to this challenge looks like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf8 challenge6c\cf9 (\cf2 string\cf9 : \cf10 String\cf9 ) \cf6 -> \cf10 String \cf9 \{\
+\cf4    var \cf2 used \cf6 = \cf9 [\cf10 Character\cf9 : \cf10 Bool\cf9 ]()\
+\cf4    let \cf2 result \cf6 = \cf2 string\cf9 .\cf2 characters\cf9 .\cf10 filter \cf9 \{\
+\cf2       used\cf9 .\cf8 updateValue\cf9 (\cf11 true\cf9 , \cf2 forKey\cf9 : \cf2 $\cf11 0\cf9 ) \cf6 == \cf11 nil\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf9 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    return \cf8 String\cf9 (\cf2 result\cf9 )\
+\}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 As long as you know about the 
+\f3\b \cf3 updateValue() 
+\f2\b0 \cf2 method, that code is brilliantly readable \'96 the use of 
+\f3\b \cf3 filter() 
+\f2\b0 \cf2 means it\'92s clear what the loop is trying to do. However, it\'92s about 3x 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f0\fs32 \cf2 www.hackingwithswift.com 27 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 slower than the second solution when using our sample input and output data, so although it gets full marks for cleverness it falls short on performance. 
+\f1\fs24 \
+}

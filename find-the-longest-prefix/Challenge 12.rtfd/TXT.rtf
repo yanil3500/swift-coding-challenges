@@ -1,0 +1,79 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red107\green0\blue109;\red135\green135\blue135;\red73\green17\blue135;\red148\green108\blue71;\red169\green0\blue15;
+\red255\green255\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;\cssrgb\c65098\c49804\c34902;\cssrgb\c72941\c0\c6667;
+\cssrgb\c100000\c100000\c100000;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 12: Find longest prefix 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Tricky\uc0\u8232 Write a function that accepts a string of words with a similar prefix, separated by spaces, and 
+\f1\fs24 \
+
+\f2\fs32 returns the longest substring that prefixes all words. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93swift switch swill swim\'94 should return \'93swi\'94. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93flip flap flop\'94 should return \'93fl\'94. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 Start with 
+\f3\b \cf3 components(separatedBy:) 
+\f2\b0 \cf2 so you can check words with a loop. 
+\f1\b Hint #2: 
+\f2\b0 You\'92ll need a property for the prefix you\'92re currently checking as well as for the best \uc0\u8232 prefix you\'92ve found so far.\u8232 
+\f1\b Hint #3: 
+\f2\b0 Make sure you use the 
+\f3\b \cf3 hasPrefix() 
+\f2\b0 \cf2 method. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Solution 
+\f2\b0\fs32 \uc0\u8232 I\'92ve watched some people blast through this code in a minute, and others struggle to finish in 30 minutes as they get into a mess of recursion. \u8232 The key to a simple solution is the 
+\f3\b \cf3 hasPrefix() 
+\f2\b0 \cf2 method, which avoids the mess of string slicing: start with an empty string, then continue adding more letters from the first word until 
+\f3\b \cf3 hasPrefix() 
+\f2\b0 \cf2 fails for any of the other words. \uc0\u8232 So: rather than trying to write a recursive function, you can solve this problem using an inner loop, like this: \u8232 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f4 \cf4 func \cf5 challenge12\cf6 (\cf2 input\cf6 : \cf7 String\cf6 ) \cf8 -> \cf7 String \cf6 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4    let \cf2 parts \cf8 = \cf2 input\cf6 .\cf5 components\cf6 (\cf2 separatedBy\cf6 : \cf9 " "\cf6 )\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb10 guard let \cf7 first \cf8 = \cf2 parts\cf6 .\cf7 first \cf4 else \cf6 \{ \cf4 return \cf9 "" \cf6 \}\
+\cf4    var \cf2 currentPrefix \cf8 = \cf9 ""\
+\cf4    var \cf2 bestPrefix \cf8 = \cf9 ""\
+\cf4    for \cf2 letter \cf4 in \cf7 first\cf6 .\cf2 characters \cf6 \{\
+\cf2       currentPrefix\cf6 .\cf5 append\cf6 (\cf2 letter\cf6 )\
+\cf4       for \cf2 word \cf4 in \cf2 parts \cf6 \{\
+\cf4          if \cf8 !\cf2 word\cf6 .\cf5 hasPrefix\cf6 (\cf2 currentPrefix\cf6 ) \{\
+\cf4             return \cf2 bestPrefix\
+\cf6          \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf6 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf2 \cb10       bestPrefix \cf8 = \cf2 currentPrefix\
+\cf6    \}\
+\cf4    return \cf2 bestPrefix\
+\cf6 \}\
+}

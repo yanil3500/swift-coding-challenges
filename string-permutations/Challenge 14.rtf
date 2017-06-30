@@ -1,0 +1,129 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red107\green0\blue109;\red135\green135\blue135;\red73\green17\blue135;\red148\green108\blue71;
+\red169\green0\blue15;\red0\green0\blue255;\red28\green117\blue20;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;\cssrgb\c65098\c49804\c34902;
+\cssrgb\c72941\c0\c6667;\cssrgb\c0\c0\c100000;\cssrgb\c11373\c52157\c9804;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 14: String permutations 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Taxing\uc0\u8232 Write a function that prints all possible permutations of a given input string. 
+\f1\fs24 \
+
+\b\fs32 Tip: 
+\f2\b0 A string permutation is any given rearrangement of its letters, for example \'93boamtw\'94 is a permutation of \'93wombat\'94. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93a\'94 should print \'93a\'94. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93ab\'94 should \'93ab\'94, \'93ba\'94. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93abc\'94 should print \'93abc\'94, \'93acb\'94, \'93bac\'94, \'93bca\'94, \'93cab\'94, \'93cba\'94. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93wombat\'94 should print 720 permutations. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 Your function will need to call itself.\uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 The number of lines printed should be the factorial of the length of your string, e.g. \uc0\u8232 \'93wombat\'94 has six characters, so will have 6! permutations: 6 x 5 x 4 x 3 x 2 x 1, or 720. 
+\f1\b Hint #3: 
+\f2\b0 You\'92ll find it easiest to convert the string to a character array for easier indexing. \uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 Each time your function is called, it should loop through all letters in the string so that all combinations are generated. \uc0\u8232 
+\f1\b Hint #5: 
+\f2\b0 You can slice arrays using 
+\f3\b \cf3 strArray[0...3]
+\f2\b0 \cf2 .\uc0\u8232 
+\f1\b Hint #6: 
+\f2\b0 You can convert string array slices into strings just by using an initializer: \uc0\u8232 
+\f3\b \cf3 String(strArray[0...3])
+\f2\b0 \cf2 . \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Solution 
+\f2\b0\fs32 \uc0\u8232 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf2 This is a recursive function with lots of looping, but the nature of factorials is that the loops get smaller each time. Given the input string \'93wombat\'94, the first time the function is called you\'92ll need to loop from 0 up to 5, calling the recursive function each time. 
+\f1\fs24 \
+
+\f2\fs32 So, initially you\'92ll pick \'93w\'94 as it\'92s the first letter, and in you go to the recursive function \'96 but this time there are only five letters to loop over, so you choose \'93o\'94, and go into the function again, etc. 
+\f1\fs24 \
+
+\f2\fs32 Eventually you spell out \'93wombat\'94, which is the result of choosing the first remaining letter each time. But now that you\'92ve reached the deepest point of the recursion, you back up a level: when you had \'93womb\'94 it chose the first letter in the remainder (\'93at\'94) to make \'93wombat\'94, but now that path has been explored it should choose the second remaining letter (\'93t\'94) to make \'93wombt\'94, at which point the only remaining letter now is \'93a\'94 to make \'93wombta\'94. 
+\f1\fs24 \
+
+\f2\fs32 Again the recursion has maxed out, so now it will need to go back one level further: when it was at \'93wom\'94 the remainder was \'93bat\'94 so it chose the first letter, but now it should choose the second, to make \'93woma\'94, with \'93bt\'94 as remainder. On the first pass it will choose \'93b\'94 first then \'93t\'94 (making \'93womabt\'94), and on the second it will choose \'93t\'94 then \'93b\'94 (making \'93womatb\'94). That subset of the path is now maxed out, so it will wind back to \'93wom\'94 and \'93bat\'94 and choose the 
+\f1\i third 
+\f2\i0 letter, to make \'93womt\'94 with \'93ba\'94 as remainder. So it will get \'93womtba\'94 then \'93womtab\'94, and so on, and so on. 
+\f1\fs24 \
+
+\f2\fs32 That\'92s the algorithm. It sounds clunky when explained step by step, but trust me: a CPU 
+\f1\i flies 
+\f2\i0 through this. Here it is in code: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge14\cf7 (\cf2 string\cf7 : \cf8 String\cf7 , \cf2 current\cf7 : \cf8 String \cf9 = \cf10 ""\cf7 ) \{\
+\cf4    let \cf2 length \cf9 = \cf2 string\cf7 .\cf2 characters\cf7 .\cf8 count\
+\cf4    let \cf2 strArray \cf9 = \cf6 Array\cf7 (\cf2 string\cf7 .\cf2 characters\cf7 )\
+\cf4    if \cf7 (\cf2 length \cf9 == \cf11 0\cf7 ) \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf12       // there's nothing left to re-arrange; print the result\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6       print\cf7 (\cf2 current\cf7 )\
+\cf6       print\cf7 (\cf10 "******"\cf7 )\
+   \} \cf4 else \cf7 \{\
+\cf6       print\cf7 (\cf2 current\cf7 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f0 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4 \cf12 \cb5 // loop through every character\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4       for \cf2 i \cf4 in \cf11 0 \cf7 ..\cf9 < \cf2 length \cf7 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf12          // get the letters before me\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4          let \cf2 left \cf9 = \cf6 String\cf7 (\cf2 strArray\cf7 [\cf11 0 \cf7 ..\cf9 < \cf2 i\cf7 ])\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf12          // get the letters after me\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4          let \cf2 right \cf9 = \cf6 String\cf7 (\cf2 strArray\cf7 [\cf2 i\cf9 +\cf11 1 \cf7 ..\cf9 < \cf2 length\cf7 ])\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf12          // put those two together and carry on\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6          challenge14\cf7 (\cf2 string\cf7 : \cf2 left \cf9 + \cf2 right\cf7 , \cf2 current\cf7 : \cf2 current \cf9 +\
+\cf6 String\cf7 (\cf2 strArray\cf7 [\cf2 i\cf7 ]))\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} \} 
+\f1\fs24 \cf2 \cb1 \
+
+\f4\fs32 \cf7 \cb5 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 Note: the 
+\f3\b \cf3 print("******") 
+\f2\b0 \cf2 and second 
+\f3\b \cf3 print(current) 
+\f2\b0 \cf2 call are there to help you see how the function works; they serve no functional purpose. 
+\f1\fs24 \
+}

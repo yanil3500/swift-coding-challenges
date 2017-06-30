@@ -1,0 +1,165 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red107\green0\blue109;\red135\green135\blue135;\red73\green17\blue135;\red148\green108\blue71;
+\red169\green0\blue15;\red0\green0\blue255;\red232\green135\blue8;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;\cssrgb\c65098\c49804\c34902;
+\cssrgb\c72941\c0\c6667;\cssrgb\c0\c0\c100000;\cssrgb\c93333\c60000\c0;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 13: Run-length encoding 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Taxing\uc0\u8232 Write a function that accepts a string as input, then returns how often each letter is repeated in 
+\f1\fs24 \
+
+\f2\fs32 a single run, taking case into account. 
+\f1\fs24 \
+
+\b\fs32 Tip: 
+\f2\b0 This approach is used in a simple lossless compression technique called run-length encoding. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93aabbcc\'94 should return \'93a2b2c2\'94. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The strings \'93aaabaaabaaa\'94 should return \'93a3b1a3b1a3\'94 \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93aaAAaa\'94 should return \'93a2A2a2\'94 \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 This would be quite straightforward in other languages using character lookahead, but that\'92s expensive in Swift thanks to grapheme clusters \'96 
+\f3\b \cf3 String.characters 
+\f1\i\b0 \cf2 isn\'92t 
+\f2\i0 an array. \uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 To use the \'93Swifty\'94 approach of looping over 
+\f3\b \cf3 String.characters 
+\f2\b0 \cf2 as-is, make sure you keep track of the current character, and its count, as you loop over the string. \uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 Alternatively, consider converting 
+\f3\b \cf3 String.characters 
+\f2\b0 \cf2 to a proper array that you can index into freely, so you can look ahead to compare letters. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Solution 
+\f2\b0\fs32 \uc0\u8232 There are two ways you could solve this, but in a stressful interview environment realistically there\'92s only one you\'92ll reach for: the \'93dumb\'94, brute force approach. I put dumb in quotes for a reason \'96 more on that later. \u8232 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf2 This approach would use an algorithm like this: 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls2\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+Create a 
+\f3\b \cf3 currentLetter 
+\f2\b0 \cf2 variable that contains an optional 
+\f3\b \cf3 Character
+\f2\b0 \cf2 , as well as a counter integer and a return value string. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+Loop through every letter in the input string. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+If the letter is equal to our current letter, add one to the counter. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+Otherwise, if 
+\f3\b \cf3 currentLetter 
+\f2\b0 \cf2 has a value it means we already had a letter and it\'92s \uc0\u8232 about to change, so append it to the return string. \u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+Regardless, update 
+\f3\b \cf3 currentLetter 
+\f2\b0 \cf2 to be the new letter, and reset the counter to 1. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+Once the loop finishes, append 
+\f3\b \cf3 currentLetter 
+\f2\b0 \cf2 to the return string along with the \uc0\u8232 counter, then return it. \u8232 That last step is easily forgotten \'96 because the return string is only modified when the letter changes, the last letter sequence won\'92t be added unless we do it by hand. \u8232 Putting that into code: \u8232 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4 \cf4 \cb5 func \cf6 challenge13a\cf7 (\cf2 input\cf7 : \cf8 String\cf7 ) \cf9 -> \cf8 String \cf7 \{\
+\cf4    var \cf2 currentLetter\cf7 : \cf8 Character\cf9 ?\
+\cf4    var \cf2 returnValue \cf9 = \cf10 ""\
+\cf4    var \cf2 letterCounter \cf9 = \cf11 0\
+\cf4    for \cf2 letter \cf4 in \cf2 input\cf7 .\cf2 characters \cf7 \{\
+\cf4       if \cf2 letter \cf9 == \cf2 currentLetter \cf7 \{\
+\cf2          letterCounter \cf9 += \cf11 1\
+\cf7       \} \cf4 else \cf7 \{\
+\cf4          if let \cf2 current \cf9 = \cf2 currentLetter \cf7 \{\
+\cf2             returnValue\cf7 .\cf6 append\cf7 (\cf10 "\cf12 \\(\cf10 current\cf12 )\\(\cf10 letterCounter\cf12 )\cf10 "\cf7 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf2 \cb5          currentLetter \cf9 = \cf2 letter\
+         letterCounter \cf9 = \cf11 1\
+\cf7       \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    if let \cf2 current \cf9 = \cf2 currentLetter \cf7 \{\
+\cf2       returnValue\cf7 .\cf6 append\cf7 (\cf10 "\cf12 \\(\cf10 current\cf12 )\\(\cf10 letterCounter\cf12 )\cf10 "\cf7 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    return \cf2 returnValue\
+\cf7 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 An alternative solution, which is probably one you would be more likely to use if you had come to Swift after learning a different language, would be to use character look ahead: if the next character is different to the current one, or if we\'92re about to hit the end of the array, then modify the return value and reset the counter. 
+\f1\fs24 \
+
+\f2\fs32 This alternative solution doesn\'92t come naturally to Swift developers, because indexing into strings is expensive in Swift thanks to the grapheme cluster system. However, you could convert the Swift character index into an array, then use 
+\f1\i that
+\f2\i0 . This would give you the following solution: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge13b\cf7 (\cf2 input\cf7 : \cf8 String\cf7 ) \cf9 -> \cf8 String \cf7 \{\
+\cf4    var \cf2 returnValue \cf9 = \cf10 ""\
+\cf4    var \cf2 letterCounter \cf9 = \cf11 0\
+\cf4    var \cf2 letterArray \cf9 = \cf6 Array\cf7 (\cf2 input\cf7 .\cf2 characters\cf7 )\
+\cf4    for \cf2 i \cf4 in \cf11 0 \cf7 ..\cf9 < \cf2 letterArray\cf7 .\cf8 count \cf7 \{\
+\cf2       letterCounter \cf9 += \cf11 1\
+\cf4       if \cf2 i \cf9 + \cf11 1 \cf9 == \cf2 letterArray\cf7 .\cf8 count \cf9 || \cf2 letterArray\cf7 [\cf2 i\cf7 ] \cf9 !=\
+\cf2 letterArray\cf7 [\cf2 i \cf9 + \cf11 1\cf7 ] \{\
+\cf2          returnValue \cf9 += \cf10 "\cf12 \\(\cf10 letterArray\cf7 [\cf10 i\cf7 ]\cf12 )\\(\cf10 letterCounter\cf12 )\cf10 "\
+\cf2          letterCounter \cf9 = \cf11 0\
+\cf7       \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    return \cf2 returnValue\
+\cf7 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f0 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 That\'92s a valid solution, but does it beat the \'93dumb\'94 one? Well, it depends what you mean by \'93beat\'94: it\'92s certainly less code, and it avoids the 
+\f3\b \cf3 if let 
+\f2\b0 \cf2 repetition, but it runs 
+\f1\i slower 
+\f2\i0 \'96 about 15% so, in my tests, despite containing much less code. 
+\f1\fs24 \
+
+\f2\fs32 So, I think the \'93dumb\'94 solution is superior: not only does it run faster, but it\'92s also easier to figure out on the fly while you\'92re being tested! 
+\f1\fs24 \
+}

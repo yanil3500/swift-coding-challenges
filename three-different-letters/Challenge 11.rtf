@@ -1,0 +1,126 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red107\green0\blue109;\red135\green135\blue135;\red73\green17\blue135;\red148\green108\blue71;
+\red0\green0\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;\cssrgb\c65098\c49804\c34902;
+\cssrgb\c0\c0\c100000;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid101\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 11: Three different letters 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Tricky\uc0\u8232 Write a function that accepts two strings, and returns true if they are identical in length but 
+\f1\fs24 \
+
+\f2\fs32 have no more than three different letters, taking case and string order into account. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The strings \'93Clamp\'94 and \'93Cramp\'94 would return true, because there is one letter difference. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The strings \'93Clamp\'94 and \'93Crams\'94 would return true, because there are two letter differences. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The strings \'93Clamp\'94 and \'93Grams\'94 would return true, because there are three letter differences. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The strings \'93Clamp\'94 and \'93Grans\'94 would return false, because there are four letter differences. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The strings \'93Clamp\'94 and \'93Clam\'94 would return false, because they are different lengths. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The strings \'93clamp\'94 and \'93maple\'94 should return false. Although they differ by only one \uc0\u8232 letter, the letters that match are in different positions. \u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 If you value your sanity, get both strings into arrays as quickly as possible. 
+\f1\b Hint #2: 
+\f2\b0 You probably want to use the 
+\f3\b \cf3 enumerated() 
+\f2\b0 \cf2 method on one array, to get the \uc0\u8232 index and character at the same time. \u8232 
+\f1\b Hint #3: 
+\f2\b0 Your function should return false as soon as it reaches four differences; there\'92s no point continuing to check characters. \uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 Make sure you check the strings are the same size first, preferably using 
+\f3\b \cf3 guard
+\f2\b0 \cf2 . \uc0\u8232 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Solution 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 This problem isn\'92t hard as long as you convert your strings into character arrays \'96 if you don\'92t, you need to advance through string indices, which is never pleasant and certainly hard to do during an interview. 
+\f1\fs24 \
+
+\f2\fs32 The simplest, clearest way to solve this challenge is like so: 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls2\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	1.	}\expnd0\expndtw0\kerning0
+Start with an early return in case the two strings have different lengths. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	2.	}\expnd0\expndtw0\kerning0
+Create arrays out of the 
+\f3\b \cf3 characters 
+\f2\b0 \cf2 properties of both strings. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	3.	}\expnd0\expndtw0\kerning0
+Initialize a 
+\f3\b \cf3 differences 
+\f2\b0 \cf2 counter to 0. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	4.	}\expnd0\expndtw0\kerning0
+Loop over the first array, using 
+\f3\b \cf3 enumerated() 
+\f2\b0 \cf2 so we get the current index as well as \uc0\u8232 each character. \u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	5.	}\expnd0\expndtw0\kerning0
+Compare that character against the character at the same index in the other string array. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	6.	}\expnd0\expndtw0\kerning0
+If they are different, add one to 
+\f3\b \cf3 differences
+\f2\b0 \cf2 . \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	7.	}\expnd0\expndtw0\kerning0
+If as a result of that 
+\f3\b \cf3 differences 
+\f2\b0 \cf2 is now 4, return false. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	8.	}\expnd0\expndtw0\kerning0
+On the other hand, if we get to the end of the array, it means we can return true. \uc0\u8232 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf2 Something like this ought to do the trick: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge11\cf7 (\cf8 first\cf7 : \cf8 String\cf7 , \cf2 second\cf7 : \cf8 String\cf7 ) \cf9 -> \cf8 Bool \cf7 \{\
+\cf4    guard \cf8 first\cf7 .\cf2 characters\cf7 .\cf8 count \cf9 == \cf2 second\cf7 .\cf2 characters\cf7 .\cf8 count \cf4 else\
+\cf7 \{ \cf4 return \cf10 false \cf7 \}\
+\cf4    let \cf2 firstArray \cf9 = \cf6 Array\cf7 (\cf8 first\cf7 .\cf2 characters\cf7 )\
+\cf4    let \cf2 secondArray \cf9 = \cf6 Array\cf7 (\cf2 second\cf7 .\cf2 characters\cf7 )\
+\cf4    var \cf2 differences \cf9 = \cf10 0\
+\cf4    for \cf7 (\cf2 index\cf7 , \cf2 letter\cf7 ) \cf4 in \cf2 firstArray\cf7 .\cf6 enumerated\cf7 () \{\
+\cf4       if \cf2 secondArray\cf7 [\cf2 index\cf7 ] \cf9 != \cf2 letter \cf7 \{\
+\cf2          differences \cf9 += \cf10 1\
+\cf4          if \cf2 differences \cf9 == \cf10 4 \cf7 \{\
+\cf4             return \cf10 false\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} \
+\} 
+\f1\fs24 \cf2 \cb1 \
+
+\f4\fs32 \cf7 \cb5 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 return \cf10 true \cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+}

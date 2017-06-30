@@ -1,0 +1,76 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red107\green0\blue109;\red135\green135\blue135;\red73\green17\blue135;\red148\green108\blue71;
+\red169\green0\blue15;\red0\green0\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;\cssrgb\c65098\c49804\c34902;
+\cssrgb\c72941\c0\c6667;\cssrgb\c0\c0\c100000;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 15: Reverse the words in a string 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Taxing\uc0\u8232 Write a function that returns a string with each of its words reversed but in the original order, 
+\f1\fs24 \
+
+\f2\fs32 without using a loop. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93Swift Coding Challenges\'94 should return \'93tfiwS gnidoC segnellahC\'94. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93The quick brown fox\'94 should return \'93ehT kciuq nworb xof\'94. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 You should start by converting the string into an array by separating on spaces. 
+\f1\b Hint #2: 
+\f2\b0 You can reverse the characters in a string by calling 
+\f3\b \cf3 reversed() 
+\f2\b0 \cf2 on the \uc0\u8232 
+\f3\b \cf3 characters 
+\f2\b0 \cf2 property.\uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 You can create a string from a character array. \uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 You want to convert an array of left to right strings into an array of right to left strings, all without using a loop - this is a perfect use for 
+\f3\b \cf3 map()
+\f2\b0 \cf2 . \uc0\u8232 
+\f1\b Hint #5: 
+\f2\b0 Once you have an array of reversed strings, you can create a single string using 
+\f3\b \cf3 joined()
+\f2\b0 \cf2 . \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Solution 
+\f2\b0\fs32 \uc0\u8232 The requirement not to use a loop is what makes this a taxing challenge; if you could just use 
+\f3\b \cf3 for-in 
+\f2\b0 \cf2 then it would be easy or tricky depending on who spoke to. \uc0\u8232 The only sensible way to solve this is using functional programming: the need to convert from one kind of array (\'93words written left to right\'94) to another (\'93words written right to left\'94) is the perfect use case for 
+\f3\b \cf3 map()
+\f2\b0 \cf2 , so most of what remains is creating the array by splitting on \uc0\u8232 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf2 spaces then recreating the string once you\'92ve reversed the words. Here\'92s my solution: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge15\cf7 (\cf2 input\cf7 : \cf8 String\cf7 ) \cf9 -> \cf8 String \cf7 \{\
+\cf4    let \cf2 parts \cf9 = \cf2 input\cf7 .\cf6 components\cf7 (\cf2 separatedBy\cf7 : \cf10 " "\cf7 )\
+\cf4    let \cf2 reversed \cf9 = \cf2 parts\cf7 .\cf8 map\
+\cf7 \{ \cf6 String\cf7 (\cf2 $\cf11 0\cf7 .\cf2 characters\cf7 .\cf6 reversed\cf7 ()) \}\
+\cf4    return \cf2 reversed\cf7 .\cf6 joined\cf7 (\cf2 separator\cf7 : \cf10 " "\cf7 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+}

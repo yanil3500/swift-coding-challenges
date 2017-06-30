@@ -1,0 +1,164 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red107\green0\blue109;\red135\green135\blue135;\red73\green17\blue135;\red148\green108\blue71;
+\red169\green0\blue15;\red0\green0\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;\cssrgb\c65098\c49804\c34902;
+\cssrgb\c72941\c0\c6667;\cssrgb\c0\c0\c100000;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 10: Vowels and consonants 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Tricky\uc0\u8232 Given a string in English, return a tuple containing the number of vowels and consonants. 
+\f1\fs24 \
+
+\b\fs32 Tip: 
+\f2\b0 Vowels are the letters, A, E, I, O, and U; consonants are the letters B, C, D, F, G, H, J, K, L, M, N, P, Q, R, S, T, V, W, X, Y, Z. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The input \'93Swift Coding Challenges\'94 should return 6 vowels and 15 consonants. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The input \'93Mississippi\'94 should return 4 vowels and 7 consonants. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 Just because a letter is not a vowel, it doesn\'92t mean it\'92s a consonant \'96 think punctuation, for example. \uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 You\'92ll need to differentiate carefully between the 
+\f3\b \cf3 String 
+\f2\b0 \cf2 and 
+\f3\b \cf3 Character 
+\f2\b0 \cf2 types. \uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 You could use 
+\f3\b \cf3 CharacterSet 
+\f2\b0 \cf2 here, but is it really needed? \uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 Your return type should be 
+\f3\b \cf3 (vowels: Int, consonants: Int)
+\f2\b0 \cf2 . \uc0\u8232 
+\f1\b Hint #5: 
+\f2\b0 Watch out for uppercase and lowercase letters \'96 an \'93A\'94 is a vowel regardless of its case. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Solution 
+\f2\b0\fs32 \uc0\u8232 There are three interesting ways to solve this challenge, and I\'92m going to present them to you slowest first \'96 although realistically you\'92ll only see significant performance differences if these functions are being called run a hundred times or more. \u8232 First, you could use 
+\f3\b \cf3 CharacterSet 
+\f2\b0 \cf2 here, but it has a fatal flaw: even though \'93Character\'94 is \uc0\u8232 right there in the name, you can\'92t ask a character set whether it contains a single character because it works on a different type called 
+\f3\b \cf3 UnicodeScalar
+\f2\b0 \cf2 . Instead, you need to convert the 
+\f3\b \cf3 Character 
+\f2\b0 \cf2 to a 
+\f3\b \cf3 String
+\f2\b0 \cf2 , then use its 
+\f3\b \cf3 rangeOfCharacter(from:) 
+\f2\b0 \cf2 method, like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge10a\cf7 (\cf2 input\cf7 : \cf8 String\cf7 ) \cf9 -> \cf7 (\cf2 vowels\cf7 : \cf8 Int\cf7 , \cf2 consonants\cf7 :\
+\cf8 Int\cf7 ) \{\
+\cf4    let \cf2 vowels \cf9 = \cf6 CharacterSet\cf7 (\cf2 charactersIn\cf7 : \cf10 "aeiou"\cf7 )\
+\cf4    let \cf2 consonants \cf9 = \cf6 CharacterSet\cf7 (\cf2 charactersIn\cf7 :\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10 "bcdfghjklmnpqrstvwxyz"\cf7 )\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4    var \cf2 vowelCount \cf9 = \cf11 0\
+\cf4    var \cf2 consonantCount \cf9 = \cf11 0\
+\cf4    for \cf2 letter \cf4 in \cf2 input\cf7 .\cf6 lowercased\cf7 ().\cf2 characters \cf7 \{\
+\cf4       let \cf2 stringLetter \cf9 = \cf6 String\cf7 (\cf2 letter\cf7 )\
+\cf4       if \cf2 stringLetter\cf7 .\cf6 rangeOfCharacter\cf7 (\cf2 from\cf7 : \cf2 vowels\cf7 ) \cf9 != \cf11 nil \cf7 \{\
+\cf2          vowelCount \cf9 += \cf11 1\
+\cf7       \} \cf4 else if \cf2 stringLetter\cf7 .\cf6 rangeOfCharacter\cf7 (\cf2 from\cf7 :\
+\cf2 consonants\cf7 ) \cf9 != \cf11 nil \cf7 \{\
+\cf2          consonantCount \cf9 += \cf11 1\
+\cf7       \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    return \cf7 (\cf2 vowelCount\cf7 , \cf2 consonantCount\cf7 )\
+\}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 The second solution builds on the first: if you\'92re going to work with string methods, why not just skip the character set entirely? There\'92s a perfectly good 
+\f3\b \cf3 contains() 
+\f2\b0 \cf2 method on strings that works just as well, so you can avoid allocating a character set at all: 
+\f1\fs24 \
+\pard\pardeftab720\sl280\partightenfactor0
+\cf2 {{\NeXTGraphic page37image11248.png \width9160 \height720
+}¬}\pard\pardeftab720\sl280\partightenfactor0
+\cf2 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 func \cf6 challenge10b\cf7 (\cf2 input\cf7 : \cf8 String\cf7 ) \cf9 -> \cf7 (\cf2 vowels\cf7 : \cf8 Int\cf7 , \cf2 consonants\cf7 :\
+\cf8 Int\cf7 ) \{\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f0 \cf2 www.hackingwithswift.com 37 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    let \cf2 vowels \cf9 = \cf10 "aeiou"\
+\cf4    let \cf2 consonants \cf9 = \cf10 "bcdfghjklmnpqrstvwxyz"\
+\cf4    var \cf2 vowelCount \cf9 = \cf11 0\
+\cf4    var \cf2 consonantCount \cf9 = \cf11 0\
+\cf4    for \cf2 letter \cf4 in \cf2 input\cf7 .\cf6 lowercased\cf7 ().\cf2 characters \cf7 \{\
+\cf4       let \cf2 stringLetter \cf9 = \cf6 String\cf7 (\cf2 letter\cf7 )\
+\cf4       if \cf2 vowels\cf7 .\cf6 contains\cf7 (\cf2 stringLetter\cf7 ) \{\
+\cf2          vowelCount \cf9 += \cf11 1\
+\cf7       \} \cf4 else if \cf2 consonants\cf7 .\cf6 contains\cf7 (\cf2 stringLetter\cf7 ) \{\
+\cf2          consonantCount \cf9 += \cf11 1\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    return \cf7 (\cf2 vowelCount\cf7 , \cf2 consonantCount\cf7 )\
+\}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 The third option is to do away with strings entirely: create arrays of vowel characters and consonant characters, then use the 
+\f3\b \cf3 contains() 
+\f2\b0 \cf2 method on the arrays to see if each letter matches. In code, you\'92d get this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge10c\cf7 (\cf2 input\cf7 : \cf8 String\cf7 ) \cf9 -> \cf7 (\cf2 vowels\cf7 : \cf8 Int\cf7 , \cf2 consonants\cf7 :\
+\cf8 Int\cf7 ) \{\
+\cf4    let \cf2 vowels \cf9 = \cf10 "aeiou"\cf7 .\cf2 characters\
+\cf4    let \cf2 consonants \cf9 = \cf10 "bcdfghjklmnpqrstvwxyz"\cf7 .\cf2 characters\
+\cf4    var \cf2 vowelCount \cf9 = \cf11 0\
+\cf4    var \cf2 consonantCount \cf9 = \cf11 0\
+\cf4    for \cf2 letter \cf4 in \cf2 input\cf7 .\cf6 lowercased\cf7 ().\cf2 characters \cf7 \{\
+\cf4       if \cf2 vowels\cf7 .\cf6 contains\cf7 (\cf2 letter\cf7 ) \{\
+\cf2          vowelCount \cf9 += \cf11 1\
+\cf7 \} \cf4 else if \cf2 consonants\cf7 .\cf6 contains\cf7 (\cf2 letter\cf7 ) \{\
+\cf2          consonantCount \cf9 += \cf11 1\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    return \cf7 (\cf2 vowelCount\cf7 , \cf2 consonantCount\cf7 )\
+\}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 There\'92s very little to separate each of these three answers in terms of performance, so go with whichever is most familiar to you. 
+\f1\fs24 \
+}
