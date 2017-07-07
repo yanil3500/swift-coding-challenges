@@ -1,0 +1,98 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red148\green108\blue71;\red107\green0\blue109;\red135\green135\blue135;\red0\green0\blue255;
+\red73\green17\blue135;\red169\green0\blue15;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c65098\c49804\c34902;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c0\c0\c100000;
+\cssrgb\c36078\c14902\c60000;\cssrgb\c72941\c0\c6667;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 22: Binary reverse 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Tricky\uc0\u8232 Create a function that accepts an unsigned 8-bit integer and returns its binary reverse, padded 
+\f1\fs24 \
+
+\f2\fs32 so that it holds precisely eight binary digits. 
+\f1\fs24 \
+
+\b\fs32 Tip: 
+\f2\b0 When you get the binary representation of a number, Swift will always use as few bits as possible \'96 make sure you pad to eight binary digits before reversing. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The number 32 is 100000 in binary, and padded to eight binary digits that\'92s 00100000. Reversing that binary sequence gives 00000100, which is 4. So, when given the input 32 your function should return 4. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The number 41 is 101001 in binary, and padded to eight binary digits that 00101001. Reversing that binary sequence gives 10010100, which is 148. So, when given the input 41 your function should return 148. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+It should go without saying that your function should be symmetrical: when fed 4 it should return 32, and when fed 148 it should return 41. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 You can get the binary representation of an integer using 
+\f3\b \cf3 String(someNumber, radix: 2)
+\f2\b0 \cf2 . \uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 You can get the decimal integer equivalent of a string containing binary using 
+\f3\b \cf3 Int(someString, radix: 2) 
+\f2\b0 \cf2 \'96 but be warned that will given you an optional integer. \uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 To pad the input number\'92s binary representation so that it holds eight digits, use the 
+\f3\b \cf3 String(repeating:count:) 
+\f2\b0 \cf2 initializer. \uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 You can reverse a character array then create a new string from it. \uc0\u8232 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Solution 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 As long as you\'92re comfortable converting to and from binary, this challenge is not likely to pose any problems for you. In fact, apart from converting between binary and decimal, the only interesting parts of the problem are calculating how much zero padding to apply and reversing the binary representation. 
+\f1\fs24 \
+
+\f2\fs32 Calculating and adding the padding can be done by subtracting the current character count from 8, like this: 
+\f1\fs24 \
+
+\f2\fs32 Reversing the padding binary representation is as easy as calling 
+\f3\b \cf3 reversed() 
+\f2\b0 \cf2 on the 
+\f3\b \cf3 characters 
+\f2\b0 \cf2 property of the binary string, then creating a new string out of it, like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 let \cf2 reversedBinary \cf6 = \cf7 String\cf8 (\cf2 paddedBinary\cf8 .\cf2 characters\cf8 .\cf7 reversed\cf8 ()) 
+\f2 \cf2 \cb1 With all that in mind, here\'92s a complete solution: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 let \cf2 paddingAmount \cf6 = \cf9 8 \cf6 - \cf2 binary\cf8 .\cf2 characters\cf8 .\cf10 count\
+\cf4 let \cf2 paddedBinary \cf6 = \cf7 String\cf8 (\cf2 repeating\cf8 : \cf11 "0"\cf8 , \cf10 count\cf8 : \cf2 paddingAmount\cf8 )\
+\cf6 + \cf2 binary\
+\cf4 func \cf7 challenge22\cf8 (\cf2 number\cf8 : \cf10 UInt\cf8 ) \cf6 -> \cf10 UInt \cf8 \{\
+\cf4    let \cf2 binary \cf6 = \cf7 String\cf8 (\cf2 number\cf8 , \cf2 radix\cf8 : \cf9 2\cf8 )\
+\cf4    let \cf2 paddingAmount \cf6 = \cf9 8 \cf6 - \cf2 binary\cf8 .\cf2 characters\cf8 .\cf10 count\
+\cf4    let \cf2 paddedBinary \cf6 = \cf7 String\cf8 (\cf2 repeating\cf8 : \cf11 "0"\cf8 , \cf10 count\cf8 :\
+\cf2 paddingAmount\cf8 ) \cf6 + \cf2 binary\
+\cf4    let \cf2 reversedBinary \cf6 =\
+\cf7 String\cf8 (\cf2 paddedBinary\cf8 .\cf2 characters\cf8 .\cf7 reversed\cf8 ())\
+\cf4    return \cf7 UInt\cf8 (\cf2 reversedBinary\cf8 , \cf2 radix\cf8 : \cf9 2\cf8 )\cf6 !\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf8 \} 
+\f1\fs24 \cf2 \cb1 \
+}
