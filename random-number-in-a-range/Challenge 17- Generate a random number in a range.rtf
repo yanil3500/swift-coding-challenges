@@ -1,0 +1,97 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red107\green0\blue109;\red135\green135\blue135;\red73\green17\blue135;\red148\green108\blue71;
+\red0\green0\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;\cssrgb\c65098\c49804\c34902;
+\cssrgb\c0\c0\c100000;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 17: Generate a random number in a range 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Easy\uc0\u8232 Write a function that accepts positive minimum and maximum integers, and returns a random 
+\f1\fs24 \
+
+\f2\fs32 number between those two bounds, inclusive. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+Given minimum 1 and maximum 5, the return values 1, 2, 3, 4, 5 are valid. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+Given minimum 8 and maximum 10, the return values 8, 9, 10 are valid. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+Given minimum 12 and maximum 12, the return value 12 is valid. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+Given minimum 12 and maximum 18, the return value 7 is invalid. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 There are lots of ways to generate random numbers in Swift; you\'92ll be judged \'96 silently or openly \'96 on your choice. \uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 Keep in mind that lots of random number generators generate from 0 up to a certain point so you\'92ll need to write code to count from an arbitrary number upwards. \uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 Also remember that lots of random number generators generate up to but 
+\f1\i excluding 
+\f2\i0 the maximum, so you should add 1 to make sure your tests pass. \uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 Take a look at 
+\f3\b \cf3 arc4random_uniform()
+\f2\b0 \cf2 . \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\uc0\u8232 
+\f0\b\fs37\fsmilli18667 Solution 
+\f2\b0\fs32 \uc0\u8232 There are several choices for random number generators, and your choice says a lot about your skill level. Very roughly: \u8232 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf2    \'95 If you used 
+\f3\b \cf3 rand() 
+\f2\b0 \cf2 you probably came from a C background, or don\'92t generally care about randomness. 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls2\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+If you used GameplayKit, you\'92re either fairly new to iOS development, or particularly interested in the random number generation shaping GameplayKit offers. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+If you used 
+\f3\b \cf3 arc4random() 
+\f2\b0 \cf2 you\'92re showing some awareness of half-decent random number generator, but are unaware of \'96 or uninterested in \'96 modulo bias. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+If you used 
+\f3\b \cf3 arc4random_uniform()
+\f2\b0 \cf2 , then you\'92re showing some serious chops. \uc0\u8232 Of the four options, 
+\f3\b \cf3 arc4random_uniform() 
+\f2\b0 \cf2 is preferred amongst developers, because it generates suitably random numbers for most purposes, it doesn\'92t require seeding, it isn\'92t prone to modulo bias, and it isn\'92t restricted to Apple platforms \'96 it\'92s a commonly used C function that is well understood. \uc0\u8232 Using 
+\f3\b \cf3 arc4random_uniform() 
+\f2\b0 \cf2 has three hiccups in Swift: it generates numbers from 0 up to an upper bound, it 
+\f1\i excludes 
+\f2\i0 the upper bound rather than 
+\f1\i including 
+\f2\i0 it, and it uses 
+\f3\b \cf3 UInt32 
+\f2\b0 \cf2 rather than 
+\f3\b \cf3 Int
+\f2\b0 \cf2 , so you need some typecasting. \uc0\u8232 We can fix all those problems and still write just one line of code to solve the challenge: \u8232 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4 \cf4 \cb5 func \cf6 challenge17\cf7 (\cf8 min\cf7 : \cf8 Int\cf7 , \cf8 max\cf7 : \cf8 Int\cf7 ) \cf9 -> \cf8 Int \cf7 \{\
+\cf4    return \cf6 Int\cf7 (\cf6 arc4random_uniform\cf7 (\cf6 UInt32\cf7 (\cf8 max \cf9 - \cf8 min \cf9 + \cf10 1\cf7 ))) \cf9 + \cf8 min\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+}

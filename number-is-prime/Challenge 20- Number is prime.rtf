@@ -1,0 +1,150 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier;\f4\fmodern\fcharset0 Courier-Bold;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red163\green0\blue79;\red255\green255\blue255;
+\red107\green0\blue109;\red135\green135\blue135;\red73\green17\blue135;\red148\green108\blue71;\red0\green0\blue255;
+\red0\green0\blue120;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c70588\c0\c38431;\cssrgb\c100000\c100000\c100000;
+\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;\cssrgb\c65098\c49804\c34902;\cssrgb\c0\c0\c100000;
+\cssrgb\c0\c0\c54510;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 20: Number is prime 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Tricky\uc0\u8232 Write a function that accepts an integer as its parameter and returns true if the number is prime. 
+\f1\fs24 \
+
+\b\fs32 Tip: 
+\f2\b0 A number is considered prime if it is greater than one and has no positive divisors other than 1 and itself. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The number 11 should return true. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The number 13 should return true. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The number 4 should return false. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The number 9 should return false. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The number 16777259 should return true. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 You should start with a brute force approach: loop through every number from 2 up to one less than the input number, and check whether the input number divides into it. \uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 You can shrink the search space by searching up to a smaller number \'96 what\'92s the highest it could be? \uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 There\'92s no point searching higher than the square root of your input number, rounding up. \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\uc0\u8232 
+\f0\b\fs37\fsmilli18667 Solution 
+\f2\b0\fs32 \uc0\u8232 There\'92s a na\'efve solution to this problem, but it has terrible performance characteristics \'96 there\'92s a reason I included 16,777,259 in the list of sample input and output. \u8232 The na\'efve solution looks like this: \u8232 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf3 \cb4 func \cf5 challenge20a\cf6 (\cf2 number\cf6 : \cf7 Int\cf6 ) \cf8 -> \cf7 Bool \cf6 \{\
+\cf3    guard \cf2 number \cf8 >= \cf9 2 \cf3 else \cf6 \{ \cf3 return \cf9 false \cf6 \}\
+\cf3    for \cf2 i \cf3 in \cf9 2 \cf6 ..\cf8 < \cf2 number \cf6 \{\
+\cf3       if \cf2 number \cf8 % \cf2 i \cf8 == \cf9 0 \cf6 \{\
+\cf3          return \cf9 false\
+\cf6       \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf6 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 return \cf9 true \cf6 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 That counts from 2 up to one less than the input number, and returns false if the input number divides equally into 
+\f4\b \cf10 i
+\f2\b0 \cf2 . That works correctly. It has a 
+\f4\b \cf10 guard 
+\f2\b0 \cf2 statement at the front because the numbers 1 and lower are not prime by definition. 
+\f1\fs24 \
+
+\f2\fs32 The problem with this function is that it\'92s computationally expensive: 16,777,259 is a prime number, so this solution will divide from 2 up to 16,777,258 and find that none of them work before deciding that the number is prime. 
+\f1\fs24 \
+
+\f2\fs32 Consider this: if the number 
+\f4\b \cf10 n 
+\f2\b0 \cf2 is not prime, it means it can be reached by multiplying two factors, 
+\f4\b \cf10 x 
+\f2\b0 \cf2 and 
+\f4\b \cf10 y
+\f2\b0 \cf2 . If both of those numbers were greater than the square root of 
+\f4\b \cf10 n
+\f2\b0 \cf2 , then 
+\f4\b \cf10 x * y 
+\f2\b0 \cf2 would be greater than 
+\f4\b \cf10 n
+\f2\b0 \cf2 , which is not possible. So, we can be sure that at least one of 
+\f4\b \cf10 x 
+\f2\b0 \cf2 or 
+\f4\b \cf10 y 
+\f2\b0 \cf2 is less than or equal to the square root of 
+\f4\b \cf10 n
+\f2\b0 \cf2 . 
+\f1\fs24 \
+
+\f2\fs32 As a result of this, we can dramatically reduce our search space: rather than counting from 2 up to 16,777,259, we can square root the number and round up, to get 4097, then search up to there and no further. Remember, we don\'92t have to find both numbers that multiply to make 
+\f4\b \cf10 n
+\f2\b0 \cf2 , just one of them, because if we find one \'96 and it isn\'92t 1 or itself \'96 it means 
+\f4\b \cf10 n 
+\f2\b0 \cf2 is not prime. 
+\f1\fs24 \
+
+\f2\fs32 So, we could write a second solution like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 func \cf5 challenge20b\cf6 (\cf2 number\cf6 : \cf7 Int\cf6 ) \cf8 -> \cf7 Bool \cf6 \{\
+\cf3    guard \cf2 number \cf8 >= \cf9 2 \cf3 else \cf6 \{ \cf3 return \cf9 false \cf6 \}\
+\cf3    guard \cf2 number \cf8 != \cf9 2 \cf3 else \cf6 \{ \cf3 return \cf9 true \cf6 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f0 \cf2 \cb1 www.hackingwithswift.com 65 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 let \cf7 max \cf8 = \cf5 Int\cf6 (\cf5 ceil\cf6 (\cf5 sqrt\cf6 (\cf5 Double\cf6 (\cf2 number\cf6 ))))\
+\cf3    for \cf2 i \cf3 in \cf9 2 \cf6 ... \cf7 max \cf6 \{\
+\cf3       if \cf2 number \cf8 % \cf2 i \cf8 == \cf9 0 \cf6 \{\
+\cf3          return \cf9 false\
+\cf6       \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf6 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 return \cf9 true \cf6 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 Because this second solution uses the closed range operator, 
+\f4\b \cf10 ...
+\f2\b0 \cf2 , rather than the half-open range operator, 
+\f4\b \cf10 ..<
+\f2\b0 \cf2 , it\'92s important to add the second 
+\f4\b \cf10 guard 
+\f2\b0 \cf2 check at the top so that 2 doesn\'92t evaluate incorrectly. 
+\f1\fs24 \
+
+\f2\fs32 This second solution performs significantly faster for primes such as 16,777,259, because rather than around 16 million searches you\'92re now doing around 4000. 
+\f1\fs24 \
+}
