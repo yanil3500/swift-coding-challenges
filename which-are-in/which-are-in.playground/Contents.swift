@@ -25,9 +25,8 @@ import UIKit
 
 func inArray(_ a1: Array<String>, _ a2: Array<String>) -> Array<String> {
     var set = Set<String>()
-    var newString = a2.joined(separator: "")
     a1.forEach { (str) in
-        if newString.contains(str){
+        if a2.joined(separator: "").lowercased().contains(str.lowercased()){
             set.insert(str)
         }
     }
