@@ -24,6 +24,9 @@ import UIKit
 
 
 func inArray(_ a1: Array<String>, _ a2: Array<String>) -> Array<String> {
+    if a1.count < 1 || a2.count < 1 {
+        return []
+    }
     var set = Set<String>()
     a1.forEach { (str) in
         if a2.joined(separator: "").lowercased().contains(str.lowercased()){
