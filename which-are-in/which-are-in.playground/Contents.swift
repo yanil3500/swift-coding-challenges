@@ -25,6 +25,13 @@ import UIKit
 
 func inArray(_ a1: Array<String>, _ a2: Array<String>) -> Array<String> {
     var set = Set<String>()
-    
+    var newString = a2.joined(separator: "")
+    a1.forEach { (str) in
+        if newString.contains(str){
+            set.insert(str)
+        }
+    }
     return Array(set).sorted()
 }
+
+print(inArray(["tarp", "mice", "bull"], ["lively", "alive", "harp", "sharp", "armstrong"]))
