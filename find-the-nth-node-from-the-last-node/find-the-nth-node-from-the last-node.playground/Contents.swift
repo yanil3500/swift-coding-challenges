@@ -17,7 +17,13 @@ extension Node: CustomStringConvertible {
 }
 
 class SLL<Element>{
-    var head : Node<Element>?
+    fileprivate var head : Node<Element>?
+}
+
+extension SLL: CustomStringConvertible {
+    var description : String {
+        
+    }
 }
 
 
