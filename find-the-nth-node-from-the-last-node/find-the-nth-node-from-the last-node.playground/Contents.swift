@@ -22,7 +22,12 @@ class SLL<Element>{
 
 extension SLL: CustomStringConvertible {
     var description : String {
-        
+        var str : String = ""
+        var curr : Node? = head
+        while let currVal : Element = curr?.data, curr != nil {
+            str += "(\(currVal)) -> "
+        }
+        return str
     }
 }
 
