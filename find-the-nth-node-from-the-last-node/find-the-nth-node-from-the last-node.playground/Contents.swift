@@ -19,6 +19,10 @@ extension Node: CustomStringConvertible {
 class SLL<Element>{
     fileprivate var head : Node<Element>?
     fileprivate var length : Int = 0
+    fileprivate var largestIndex : Int = 0
+    var isEmpty : Bool {
+        return length == 0
+    }
 }
 
 extension SLL: CustomStringConvertible {
@@ -44,32 +48,73 @@ extension SLL {
             newNode?.next = head
             head = newNode
             length += 1
+            largestIndex += 1
         }
     }
     
     func remove(afterIndex index: Int) -> Element? {
-        if head != nil {
+        if !isEmpty {
             if index == 0 {
                 guard let deletedVal : Element = head?.data else { return nil }
                 head = head?.next
                 length -= 1
+                largestIndex -= 1
                 return deletedVal
             }
-            var prev : Node<Element>?
-            var curr : Node? = head
-            var count : Int = 0
-            while count < index && curr?.next != nil {
-                prev = curr
-                curr = curr?.next
-                count += 1
+            if index < largestIndex {
+                var prev : Node<Element>?
+                var curr : Node? = head
+                var count : Int = 0
+                while count <= index && curr?.next != nil {
+                    prev = curr
+                    curr = curr?.next
+                    count += 1
+                }
+                prev?.next = curr?.next
+                curr?.next = nil
+                guard let deletedVal : Element = curr?.data else { return nil }
+                length -= 1
+                largestIndex -= 1
+                return deletedVal
             }
-            prev?.next = curr?.next
-            curr?.next = nil
-            guard let deletedVal : Element = curr?.data else { return nil }
-            length -= 1
-            return deletedVal
         }
         return nil
+    }
+    
+    func remove(beforeIndex index: Int) -> Element? {
+        if !isEmpty && index >= 0 {
+            if index - 1 == 0 {
+                guard let deletedVal : Element = head?.data else { return nil }
+                head = head?.next
+                length -= 1
+                largestIndex -= 1
+                return deletedVal
+            }
+            
+            if index <= largestIndex {
+                var prev : Node<Element>?
+                var curr : Node? = head
+                var count : Int = 0
+                while count < index-1 && curr?.next != nil {
+                    prev = curr
+                    curr = curr?.next
+                    count += 1
+                }
+                prev?.next = curr?.next
+                curr?.next = nil
+                guard let deletedVal : Element = curr?.data else { return nil }
+                length -= 1
+                largestIndex -= 1
+                return deletedVal
+            }
+        }
+        return nil
+    }
+    
+    
+    
+    func theLargest() -> Int {
+        return largestIndex
     }
 }
 
@@ -79,9 +124,8 @@ for letter in "mo' money, more' problems".components(separatedBy: " "){
     a_list.prepend(newData: letter)
 }
 
-print(a_list)
-print(a_list.remove(afterIndex: 1))
-print(a_list)
+print(a_list.theLargest())
+
 
 
 
