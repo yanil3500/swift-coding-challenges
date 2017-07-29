@@ -26,9 +26,36 @@ extension SLL: CustomStringConvertible {
         var curr : Node? = head
         while let currVal : Element = curr?.data, curr != nil {
             str += "(\(currVal)) -> "
+            curr = curr?.next
         }
+        str += "nil"
         return str
     }
 }
+
+extension SLL {
+    func prepend(newData data: Element){
+        if head == nil {
+            head = Node(withData: data)
+        } else {
+            var newNode : Node? = Node(withData: data)
+            newNode?.next = head
+            head = newNode
+        }
+    }
+}
+
+
+var a_list = SLL<String>()
+for letter in "mo' money, mo' problems".components(separatedBy: " "){
+    a_list.prepend(newData: letter)
+}
+
+print(a_list)
+
+
+
+
+
 
 
