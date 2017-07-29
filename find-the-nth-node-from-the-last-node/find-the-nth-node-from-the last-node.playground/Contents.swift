@@ -2,11 +2,21 @@
 
 import UIKit
 
-class Node<Element> {
+class Node<Element: Hashable> {
     var data : Element
     var next : Node?=nil
     init(withData data: Element) {
         self.data = data
+    }
+}
+
+extension Node: Hashable {
+    var hashValue : Int {
+        return "\(data)".hashValue
+    }
+    
+    final class func ==(lhs: Node, rhs: Node) -> Bool {
+        return lhs.data == rhs.data
     }
 }
 
@@ -16,7 +26,7 @@ extension Node: CustomStringConvertible {
     }
 }
 
-class SLL<Element>{
+class SLL<Element: Hashable>{
     fileprivate var head : Node<Element>?
     fileprivate var length : Int = 0
     fileprivate var largestIndex : Int = 0
@@ -28,7 +38,7 @@ class SLL<Element>{
 extension SLL: CustomStringConvertible {
     var description : String {
         var str : String = ""
-        var curr : Node? = head
+        var curr : Node<Element>? = head
         while let currVal : Element = curr?.data, curr != nil {
             str += "(\(currVal)) -> "
             curr = curr?.next
@@ -142,18 +152,31 @@ extension SLL {
         return nil
     }
     
-    
-    
-    func theLargest() -> Int {
-        return largestIndex
+    func search(forData data: Element) -> Bool {
+        return search(currentNode: head, forData:data)
+    }
+    fileprivate func search(currentNode node: Node<Element>?, forData data: Element) -> Bool {
+        if let val : Element = node?.data, val == data {
+            return true
+        }
+        
+        if node == nil {
+            return false
+        }
+        
+        return search(currentNode: node?.next, forData: data)
     }
 }
 
 
 var a_list = SLL<String>()
 for letter in "mo' money, more' problems".components(separatedBy: " "){
-    a_list.prepend(newData: letter)
+    a_list.prepend(newData: letter.lowercased())
 }
+
+print(a_list)
+print(a_list.search(forData: "money,".lowercased()))
+
 
 
 
