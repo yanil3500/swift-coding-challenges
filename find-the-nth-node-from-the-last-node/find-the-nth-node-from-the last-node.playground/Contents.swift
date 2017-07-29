@@ -28,8 +28,8 @@ extension Node: CustomStringConvertible {
 
 class SLL<Element: Hashable>{
     fileprivate var head : Node<Element>?
+    fileprivate var tail : Node<Element>?
     fileprivate var length : Int = 0
-    fileprivate var largestIndex : Int = 0
     var isEmpty : Bool {
         return length == 0
     }
@@ -52,106 +52,35 @@ extension SLL {
     func append(newData data: Element){
         if head == nil {
             head = Node(withData: data)
+            tail = head
             length += 1
         } else {
-            var curr : Node? = head
-            while curr?.next != nil {
+            tail?.next = Node(withData: data)
+            tail = tail?.next
+            length += 1
+        }
+    }
+    
+    func remove(dataFromList data: Element) -> Bool {
+        if contains(forData: data) && length >= 1{
+            if let headData : Element = head?.data, headData == data {
+                head = head?.next
+                length -= 1
+                return true
+            }
+            var prev : Node<Element>? = head
+            var curr : Node<Element>? = head?.next
+            while let currVal: Element = curr?.data, curr?.next != nil {
+                if currVal == data {
+                    prev?.next = curr?.next
+                    curr?.next = nil
+                    return true
+                }
+                prev = curr
                 curr = curr?.next
             }
-            curr?.next = Node(withData: data)
-            length += 1
-            largestIndex += 1
         }
-    }
-    
-    func remove(afterIndex index: Int) -> Element? {
-        if !isEmpty {
-            if index == 0 {
-                guard let deletedVal : Element = head?.data else { return nil }
-                head = head?.next
-                length -= 1
-                largestIndex -= 1
-                return deletedVal
-            }
-            if index < largestIndex {
-                var prev : Node<Element>?
-                var curr : Node? = head
-                var count : Int = 0
-                while count <= index && curr?.next != nil {
-                    prev = curr
-                    curr = curr?.next
-                    count += 1
-                }
-                prev?.next = curr?.next
-                curr?.next = nil
-                guard let deletedVal : Element = curr?.data else { return nil }
-                length -= 1
-                largestIndex -= 1
-                return deletedVal
-            }
-        }
-        return nil
-    }
-    
-    func remove(beforeIndex index: Int) -> Element? {
-        if !isEmpty && index >= 0 {
-            if index - 1 == 0 {
-                guard let deletedVal : Element = head?.data else { return nil }
-                head = head?.next
-                length -= 1
-                largestIndex -= 1
-                return deletedVal
-            }
-            
-            if index <= largestIndex {
-                var prev : Node<Element>?
-                var curr : Node? = head
-                var count : Int = 0
-                while count < index-1 && curr?.next != nil {
-                    prev = curr
-                    curr = curr?.next
-                    count += 1
-                }
-                prev?.next = curr?.next
-                curr?.next = nil
-                guard let deletedVal : Element = curr?.data else { return nil }
-                length -= 1
-                largestIndex -= 1
-                return deletedVal
-            }
-        }
-        return nil
-    }
-    
-    func remove(atIndex index: Int) -> Element? {
-        if !isEmpty && index >= 0 {
-            if index == 0 {
-                guard let deletedVal : Element = head?.data else { return nil }
-                head = head?.next
-                length -= 1
-                largestIndex -= 1
-                return deletedVal
-            }
-            
-            if index <= largestIndex {
-                var prev : Node<Element>?
-                var curr : Node? = head
-                var count : Int = 0
-                while count != index && curr?.next != nil {
-                    prev = curr
-                    curr = curr?.next
-                    count += 1
-                }
-                
-                prev?.next = curr?.next
-                curr?.next = nil
-                guard let deletedVal : Element = curr?.data else { return nil }
-                length -= 1
-                largestIndex -= 1
-                return deletedVal
-            }
-        }
-        return nil
+        return false
     }
     
     func contains(forData data: Element) -> Bool {
@@ -201,9 +130,7 @@ func findTheNthToLastNode<Element>(nthToLastNode list: SLL<Element>?, n: Int) ->
 
 
 
-
+print("Before removal:")
+print(a_list.remove(dataFromList: "quick"))
 print(a_list)
 
-var result = findTheNthToLastNode(nthToLastNode: a_list, n: 2)
-
-print(result)
