@@ -111,6 +111,37 @@ extension SLL {
         return nil
     }
     
+    func remove(atIndex index: Int) -> Element? {
+        if !isEmpty && index >= 0 {
+            if index == 0 {
+                guard let deletedVal : Element = head?.data else { return nil }
+                head = head?.next
+                length -= 1
+                largestIndex -= 1
+                return deletedVal
+            }
+            
+            if index <= largestIndex {
+                var prev : Node<Element>?
+                var curr : Node? = head
+                var count : Int = 0
+                while count != index && curr?.next != nil {
+                    prev = curr
+                    curr = curr?.next
+                    count += 1
+                }
+                
+                prev?.next = curr?.next
+                curr?.next = nil
+                guard let deletedVal : Element = curr?.data else { return nil }
+                length -= 1
+                largestIndex -= 1
+                return deletedVal
+            }
+        }
+        return nil
+    }
+    
     
     
     func theLargest() -> Int {
@@ -124,7 +155,6 @@ for letter in "mo' money, more' problems".components(separatedBy: " "){
     a_list.prepend(newData: letter)
 }
 
-print(a_list.theLargest())
 
 
 
