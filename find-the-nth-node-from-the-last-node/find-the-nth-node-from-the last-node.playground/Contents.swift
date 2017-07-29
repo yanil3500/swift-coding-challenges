@@ -10,5 +10,9 @@ class Node<Element> {
     }
 }
 
-
+extension Node: CustomStringConvertible {
+    var description: String {
+        return "\(data)"
+    }
+}
 
