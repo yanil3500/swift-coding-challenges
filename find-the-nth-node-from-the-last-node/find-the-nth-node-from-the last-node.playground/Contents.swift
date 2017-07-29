@@ -49,14 +49,16 @@ extension SLL: CustomStringConvertible {
 }
 
 extension SLL {
-    func prepend(newData data: Element){
+    func append(newData data: Element){
         if head == nil {
             head = Node(withData: data)
             length += 1
         } else {
-            let newNode : Node? = Node(withData: data)
-            newNode?.next = head
-            head = newNode
+            var curr : Node? = head
+            while curr?.next != nil {
+                curr = curr?.next
+            }
+            curr?.next = Node(withData: data)
             length += 1
             largestIndex += 1
         }
@@ -152,37 +154,56 @@ extension SLL {
         return nil
     }
     
-    func search(forData data: Element) -> Bool {
+    func contains(forData data: Element) -> Bool {
         return search(currentNode: head, forData:data)
     }
+    
     fileprivate func search(currentNode node: Node<Element>?, forData data: Element) -> Bool {
         if let val : Element = node?.data, val == data {
             return true
         }
-        
         if node == nil {
             return false
         }
         
         return search(currentNode: node?.next, forData: data)
     }
+
 }
 
 
 var a_list = SLL<String>()
-for letter in "mo' money, more' problems".components(separatedBy: " "){
-    a_list.prepend(newData: letter.lowercased())
+for letter in "the quick brown fox, jumped over the lazy dog.".components(separatedBy: " "){
+    a_list.append(newData: letter.lowercased())
 }
 
+
+
+
+
+
+func findTheNthToLastNode<Element>(nthToLastNode list: SLL<Element>?, n: Int) -> Node<Element>? {
+    if let length : Int = list?.length, list?.head == nil || n > length {
+        return nil
+    }
+    guard var count : Int = list?.length else { return nil }
+    var prev : Node? = list?.head
+    var curr : Node? = list?.head
+    while curr?.next != nil, count != n {
+        if count > n {
+            prev = prev?.next
+        }
+        curr = curr?.next
+        count -= 1
+    }
+    return prev
+}
+
+
+
+
 print(a_list)
-print(a_list.search(forData: "money,".lowercased()))
 
+var result = findTheNthToLastNode(nthToLastNode: a_list, n: 2)
 
-
-
-
-
-
-
-
-
+print(result)
